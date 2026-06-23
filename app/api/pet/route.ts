@@ -1,5 +1,6 @@
   import { getGitHubStats } from "@/lib/github";
   import { getPetState } from "@/lib/pet";
+  import { ASSETS } from "@/lib/assets";
 
   export async function GET() {
   const stats = await getGitHubStats("vishyyyyyyyyy");
@@ -27,7 +28,7 @@
       />
 
       <image
-        href="https://github-readme-pet-yw8h.vercel.app/assets/fish.png"
+        href="${ASSETS.fish}"
         x="110"
         y="20"
         width="250"
