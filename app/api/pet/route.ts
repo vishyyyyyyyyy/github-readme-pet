@@ -27,7 +27,7 @@
       />
 
       <image
-        href="/assets/fish.png"
+        href="https://github-readme-pet-yw8h.vercel.app/assets/fish.png"
         x="110"
         y="20"
         width="250"

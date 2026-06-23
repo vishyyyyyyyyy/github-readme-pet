@@ -38,20 +38,8 @@ export async function getGitHubStats(username: string) {
 
   const json = await res.json();
 
-  // If the GitHub API returns errors (e.g. missing or invalid token),
-  // `json.data` or `json.data.user` may be undefined which would
-  // cause a server crash when accessing properties. Handle this
-  // gracefully and return safe defaults so the endpoint doesn't 500.
-  if (!json || !json.data || !json.data.user) {
-    console.error("GitHub API error or missing data:", json);
-    return {
-      contributions: 0,
-      currentStreak: 0,
-      projects: 0,
-    };
-  }
-
-  const calendar = json.data.user.contributionsCollection.contributionCalendar;
+  const calendar =
+    json.data.user.contributionsCollection.contributionCalendar;
 
   const days = calendar.weeks.flatMap(
     (week: any) => week.contributionDays

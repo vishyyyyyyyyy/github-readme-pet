@@ -1,11 +1,13 @@
-    export function getPetState(commits: number) {
+export function getPetState(commits: number) {
+  const base = "https://github-readme-pet-yw8h.vercel.app";
+
   if (commits === 0) {
     return {
-      asset: "/assets/sleeping_cat.png",
+      asset: `${base}/assets/sleeping_cat.png`,
     };
   }
 
   return {
-    asset: "/assets/awake_cat.png",
+    asset: `${base}/assets/awake_cat.png`,
   };
 }
