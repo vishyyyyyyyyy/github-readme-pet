@@ -8,8 +8,8 @@
   const pet = getPetState(stats.currentStreak);
     const svg = `
     <svg  
-      width="400"
-      height="400"
+      width="350"
+      height="380"
       xmlns="http://www.w3.org/2000/svg"
     >
 
@@ -21,22 +21,22 @@
 
       <image
         href="${pet.asset}"
-        x="105"
-        y="120"
+        x="30"
+        y="90"
         width="250"
         height="250"
       />
 
       <image
         href="${ASSETS.fish}"
-        x="110"
+        x="33"
         y="20"
         width="250"
-        height="120"
+        height="110"
       />
 
       <text
-        x="127"
+        x="75"
         y="70"
         fill="white"
         font-size="16"
@@ -47,7 +47,7 @@
       </text>
 
       <text
-        x="140"
+        x="90"
         y="105"
         fill="white"
         font-family="Arial, sans-serif"
