@@ -36,7 +36,7 @@
       />
 
       <text
-        x="75"
+        x="70"
         y="70"
         fill="white"
         font-size="16"
