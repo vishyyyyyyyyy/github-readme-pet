@@ -8,8 +8,8 @@
   const pet = getPetState(stats.currentStreak);
     const svg = `
     <svg  
-      width="350"
-      height="380"
+      width="330"
+      height="330"
       xmlns="http://www.w3.org/2000/svg"
     >
 
