@@ -1,18 +1,11 @@
 export async function getGitHubStats(username: string) {
   const query = `
-  query($login:String!) {
-    user(login:$login) {
-      repositories(ownerAffiliations: OWNER) {
-        totalCount
-      }
-
+  query($login: String!) {
+    user(login: $login) {
       contributionsCollection {
         contributionCalendar {
-          totalContributions
-
           weeks {
             contributionDays {
-              date
               contributionCount
             }
           }
@@ -21,6 +14,7 @@ export async function getGitHubStats(username: string) {
     }
   }
   `;
+  
 
   const res = await fetch("https://api.github.com/graphql", {
     method: "POST",
@@ -48,9 +42,9 @@ export async function getGitHubStats(username: string) {
   const currentStreak = calculateCurrentStreak(days);
 
   return {
-    contributions: calendar.totalContributions,
+    //contributions: calendar.totalContributions,
     currentStreak,
-    projects: json.data.user.repositories.totalCount,
+    //projects: json.data.user.repositories.totalCount,
   };
 }
 
