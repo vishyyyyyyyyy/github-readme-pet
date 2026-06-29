@@ -6,6 +6,7 @@ function toBase64(filePath: string) {
   return `data:image/png;base64,${file.toString("base64")}`;
 }
 
+//convert assets -> base 64 + export as object
 export const ASSETS = {
   sleepingCat: toBase64(path.join(process.cwd(), "public/assets/sleeping_cat.png")),
   awakeCat: toBase64(path.join(process.cwd(), "public/assets/awake_cat.png")),
