@@ -128,7 +128,6 @@ Moving on to pet.ts, here we will choose which kitty asset to display based on t
 Start by importing the ```ASSETS``` objects
 ```
  import { ASSETS } from "@/lib/assets";
-
 ```
 Then, create an export function called ```getPetState(commits:number)``` which expects a number representing how many contributions have been made. 
 Next, we use a simple ```if``` statement. If the commit streak is 0, we return the sleeping cat asset. Otherwise, we return our awake cat asset!
@@ -185,7 +184,6 @@ Next, lets send an HTTP POST request to github. We now get to use the token we p
       },
     }),
   });
-
 ```
 This request query sends the username to GitHub and waits for a response that gets converted into a JSON:
 ```
@@ -281,7 +279,6 @@ First create the SVG canvas. Ours is 330 x 330 pixels, but feel free to experime
 ```
 Now let’s create a rectangle. This rectangle will be our “background”. While placing all the assets, it’s helpful to keep the fill=”black” or any other color so you can see where things are being placed!
 ```
-
       <rect
         width="100%"
         height="100%"
