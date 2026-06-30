@@ -1,5 +1,7 @@
 # Create a README Widget using GitHub GraphQL API
-Difficulty level: Medium ▰▰▱▱
+Difficulty: Medium ▰▰▱▱ (but super beginner friendly!!)
+Time: ~30 mins
+
 
 ## Introduction
 
@@ -7,11 +9,11 @@ Have you ever looked at someone's GitHub profile README and seen a cool snake co
 <img width="800" height="auto" alt="githubsnake" src="https://github.com/user-attachments/assets/d29de9b5-f81c-433e-be45-cec87d732cc0" />
 
 
-or a collection of or stat cards that update dynamically?
+or a collection of stat cards that update dynamically?
 
 <img width="400" height="auto" alt="githubstats" src="https://github.com/user-attachments/assets/a936e719-9153-4546-885a-5776b98c14bf" />
 
-They’re a fun way to showcase your GitHub activity, but most profile READMEs use the same handful of stat templates to display commit streak and repository counts on their readme, making it very common to see the same widget on hundreds of other profiles.
+They’re a fun way to showcase your GitHub activity, but most profile READMEs use the same handful of stat templates to display commit streaks and repository counts on their READMEs, making it very common to see the same widget on hundreds of other profiles.
 
 But what if you could make and customize your own?
 
@@ -20,7 +22,7 @@ Example below ⤵︎⟢
 
 <img width="300" height="auto" alt="widgetex" src="https://github.com/user-attachments/assets/3f668cb7-aca7-4410-9538-b8d2753a42f5" />
 
-(ps. the cat sleeps if your contribution streak is a zero ( •͈૦•͈ ) )
+(ps. the cat sleeps if your contribution streak is zero ( •͈૦•͈ ) )
 
 Along the way, you’ll learn how to:
 - Authenticate with the GitHub GraphQL API
@@ -69,7 +71,7 @@ public/
 .env
 ```
 ## Step 2: Creating an Access Token
-Now, we need to create a fine-grained Personal Access Token so our widget can access Github’s GraphQL API. 
+Now, we need to create a fine-grained Personal Access Token so our widget can access GitHub’s GraphQL API. 
 
 But first, what is a GitHub GraphQL API? 
 GitHub GraphQL API is an API provided by GitHub that lets you query and modify GitHub data using the GraphQL query language, rather than making separate REST requests! 
@@ -92,7 +94,7 @@ In assets.ts, we’ll start by importing Node’s ```fs```(FileSystem) to read i
 import fs from "fs";
 import path from "path";
 ```
-Next we’ll create a base64 conversion function that takes in a path of an image file and converts it into a Base64 data URl string so browsers recoignize the assets as images.
+Next, we’ll create a Base64 conversion function that takes in a path of an image file and converts it into a Base64 data URL string so browsers recognize the assets as images.
 
 ```
 function toBase64(filePath: string) {
@@ -149,7 +151,7 @@ We are returning an object rather than an image, so it’s easy to add more info
 ## Step 5: Obtaining GitHub stats with GraphQL
 Now for the fun part! Let's learn how to use GitHub GraphQL API to display user stats! In this tutorial, we will be displaying the current contribution streak :)
 
-In github.ts, lets create a new ```async``` function that takes in a string parameter for your username. Next we’ll write a GraphQL query using a ``` $login``` variable so we can dynamically access GitHub data for any user
+In github.ts, let's create a new ```async``` function that takes in a string parameter for your username. Next, we’ll write a GraphQL query using a ``` $login``` variable so we can dynamically access GitHub data for any user
 ```
 export async function getGitHubStats(username: string) {
   const query = `
@@ -159,7 +161,7 @@ export async function getGitHubStats(username: string) {
         contributionCalendar {
           weeks { //splits the contributions into weeks
             contributionDays { //further splits the contributions into days 
-              contributionCount //stores the contributions day by day groupes into weeks
+              contributionCount //stores the contributions day by day grouped into weeks
             }
           }
         }
@@ -169,7 +171,7 @@ export async function getGitHubStats(username: string) {
   `;
 ```
 
-Next, lets send an HTTP POST request to GitHub. We now get to use the token we placed in the .```env``` file~
+Next, let's send an HTTP POST request to GitHub. We now get to use the token we placed in the .```env``` file~
 ```
  const res = await fetch("https://api.github.com/graphql", { //sends a network req to GraphQL endpoint
     method: "POST",
@@ -185,13 +187,13 @@ Next, lets send an HTTP POST request to GitHub. We now get to use the token we p
     }),
   });
 ```
-This request query sends the username to GitHub and waits for a response that gets converted into a JSON:
+This request query sends the username to GitHub and waits for a response that gets converted into JSON:
 ```
  const json = await res.json();
 ```
 
 Now, let’s extract contribution data!(¬ᴗ ´¬ )
-We store the contribution counts in a calendar variable, then use ```.flatMap()``` to remove the week structure turn everything into one big array of days.
+We store the contribution counts in a calendar variable, then use ```.flatMap()``` to remove the week structure and turn everything into one big array of days.
 ```
 const calendar =
     json.data.user.contributionsCollection.contributionCalendar;
@@ -200,7 +202,7 @@ const calendar =
     (week: any) => week.contributionDays
   );
 ```
-Getting closer! Now lets calculate the user commit streak. We pass our ```days``` array into a calculateCurrentStreak function and return it so we can display on our widget :) 
+Getting closer! Now let's calculate the user commit streak. We pass our ```days``` array into a calculateCurrentStreak function and return it so we can display it on our widget :) 
 ```
   const currentStreak = calculateCurrentStreak(days);
 
@@ -210,7 +212,7 @@ Getting closer! Now lets calculate the user commit streak. We pass our ```days``
 }
 ```
 ## Step 6: Calculating the streak
-GitHub gives us dates from oldest →  newest. But to find current streak, we need to reverse it to go from newest → oldest.
+GitHub gives us dates from oldest →  newest. But to find the current streak, we need to reverse it to go from newest → oldest.
 
 Let’s create a calculateCurrentStreak function that takes in our dates array and create a streak variable that starts counting up from zero and will increase as we find consecutive active days.
 ```
@@ -224,7 +226,7 @@ We  need to choose where to start counting our streak from. By default, we will 
 ```
   let startIndex = 0;
 ```
-But there is a special case. What happens if today has 0 contributions but the user might make a contribution later? We need to create an if statement to checkthe previous day contribution to start out streak from!
+But there is a special case. What happens if today has 0 contributions but the user might make a contribution later? We need to create an if statement to check the previous day's contribution to start our streak from!
 ```
 //here we check if there was a commit activity from the day before bcuz GitHub considers streak alive if day isn’t over yet!
   if (
@@ -236,7 +238,7 @@ But there is a special case. What happens if today has 0 contributions but the u
 ```
 
 We need to look for a continuous chain of active days. So, let’s create a for loop!
-As long as everyday has atleast 1 contribution, the streak extends. 
+As long as every day has at least 1 contribution, the streak extends. 
 ```
   for (let i = startIndex; i < reversed.length; i++) {
     if (reversed[i].contributionCount > 0) {
@@ -251,24 +253,24 @@ As long as everyday has atleast 1 contribution, the streak extends.
 ```
 
 ## Step 7: Creating an SVG
-Let’s put all of this together! In route.ts import the helper functions ```getGitHubStas()``` to fetch the current GitHub streak, ```getPetState()``` to decide wheter the cat should be sleeping or awake and ```ASSETS``` that contain Base64 data objects
+Let’s put all of this together! In route.ts import the helper functions ```getGitHubStas()``` to fetch the current GitHub streak, ```getPetState()``` to decide whether the cat should be sleeping or awake and ```ASSETS``` that contain Base64 data objects
 ```
  import { getGitHubStats } from "@/lib/github";
   import { getPetState } from "@/lib/pet";
   import { ASSETS } from "@/lib/assets";
 ```
-Next, create an GET API route. Everytime someone visits ```/api/pet```, this function will run automatically, get your latest GitHub contribution streak and generate an SVG!
+Next, create a GET API route. Every time someone visits ```/api/pet```, this function will run automatically, get your latest GitHub contribution streak and generate an SVG!
 ```
   export async function GET() {
   const stats = await getGitHubStats("vishyyyyyyyyy"); //replace this with your own GitHub username
 ```
-Now we’l decide which kitty to display based on the current streak with out helper function from pet.ts
+Now we’ll decide which kitty to display based on the current streak with our helper function from pet.ts
 ```
   const pet = getPetState(stats.currentStreak);
 ```
-The next step is creating our SVG. An SVG is just XML that describes shapes, images and text. Since we are using a template string, we can insert JavaScript values (like our streak count or Base64 images) directly into the SVG! 
+The next step is creating our SVG. An SVG is just XML that describes shapes, images, and text. Since we are using a template string, we can insert JavaScript values (like our streak count or Base64 images) directly into the SVG! 
 
-First create the SVG canvas. Ours is 330 x 330 pixels, but feel free to experiment with different sizes for different layout options!
+First, create the SVG canvas. Ours is 330 x 330 pixels, but feel free to experiment with different sizes for different layout options!
 ```
     const svg = `
     <svg  
@@ -285,7 +287,7 @@ Now let’s create a rectangle. This rectangle will be our “background”. Whi
         fill="black" //change the fill to “none “ after you are happy with the layout :D 
       />
 ```
-Here, i’ll add the cat! I’ve positioned it at the bottom of the rectangle
+Here, I’ll add the cat! I’ve positioned it at the bottom of the rectangle
 ```
       <image
         href="${pet.asset}" //pet.asset contains either the sleeping or awake cat based on streak
@@ -305,7 +307,7 @@ After that, let’s place the fish above the cat.
         height="110"
       />
 ```
-Try playing around with the x,y,width and heigh values until you are happy with the positioning ٩(^ᗜ^ )و ´-
+Try playing around with the x, y, width, and height values until you are happy with the positioning ٩(^ᗜ^ )و ´-
 
 Next, let’s add some text to our widget.
 ```
@@ -320,7 +322,7 @@ Next, let’s add some text to our widget.
      Commit Streak
       </text>
 ```
-Notice below, we’re using <tspan> tags instead of one large <text> element. This lets us style different parts of the same line. In this case, I made the actuarial streak number count font size a lot larger than the word “days”. 
+Notice below that we’re using <tspan> tags instead of one large <text> element. This lets us style different parts of the same line. In this case, I made the actuarial streak number count font size a lot larger than the word “days”. 
 ```
       <text
         x="90"
@@ -364,7 +366,7 @@ Your final should look something like this!♪┏(˶⎚-⎚˶)┛♪
 <img width="800" height="auto" alt="full readme + widget" src="https://github.com/user-attachments/assets/c4ca7021-3210-4599-a219-d30fc5ea2c82" />
 
 
-Every time someone visits your GitHub profile, Github will request your SVG from ```/api/pet```, dynamically updating your contribution streak.
+Every time someone visits your GitHub profile, GitHub will request your SVG from ```/api/pet```, dynamically updating your contribution streak.
 
-Congrats!! You just build your very own dynamic GitHub README widget. From here, you can customize it however you’d like by adding more kitty states and different stats using other [GitHub GraphQL queries](https://docs.github.com/en/graphql/reference?utm_source=chatgpt.com )
+Congrats!! You just built your very own dynamic GitHub README widget. From here, you can customize it however you’d like by adding more kitty states and different stats using other [GitHub GraphQL queries](https://docs.github.com/en/graphql/reference?utm_source=chatgpt.com )
 , animations or something completely new!
