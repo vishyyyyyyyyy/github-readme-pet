@@ -1,5 +1,6 @@
 # Create a README Widget using GitHub GraphQL API
 Difficulty: Medium ▰▰▱▱ (but super beginner friendly!!)
+
 Time: ~30 mins
 
 
