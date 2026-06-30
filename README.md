@@ -366,8 +366,14 @@ Now simply embed your deployment in your GitHub README as an img!
 Your final should look something like this!♪┏(˶⎚-⎚˶)┛♪
 <img width="800" height="auto" alt="full readme + widget" src="https://github.com/user-attachments/assets/c4ca7021-3210-4599-a219-d30fc5ea2c82" />
 
-
+## Conclusion 
 Every time someone visits your GitHub profile, GitHub will request your SVG from ```/api/pet```, dynamically updating your contribution streak.
 
-Congrats!! You just built your very own dynamic GitHub README widget. From here, you can customize it however you’d like by adding more kitty states and different stats using other [GitHub GraphQL queries](https://docs.github.com/en/graphql/reference?utm_source=chatgpt.com )
-, animations or something completely new!
+Congrats!! You just built your very own dynamic GitHub README widget. 
+
+From here, you can customize it however you’d like by adding more kitty states and different stats using other [GitHub GraphQL queries](https://docs.github.com/en/graphql/reference?utm_source=chatgpt.com )
+, animations or something completely new!  ⋆ ·˚ ༘ *
+
+I hope you had fun building your very own GitHub widget while learning about the GitHub GraphQL API and SVG generation. I'd love to see what you all come up with! c:
+
+Happy coding~ (∩^o^)⊃━☆
