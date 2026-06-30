@@ -11,7 +11,7 @@ or a collection of or stat cards that update dynamically?
 
 <img width="400" height="auto" alt="githubstats" src="https://github.com/user-attachments/assets/a936e719-9153-4546-885a-5776b98c14bf" />
 
-They’re a fun way to showcase your GitHub activity, but most profile READMEsEs use the same handful of stat templates to display commit streak and repository counts on their readme, making it very common to see the same widget on hundreds of other profiles.
+They’re a fun way to showcase your GitHub activity, but most profile READMEs use the same handful of stat templates to display commit streak and repository counts on their readme, making it very common to see the same widget on hundreds of other profiles.
 
 But what if you could make and customize your own?
 
@@ -71,8 +71,8 @@ public/
 ## Step 2: Creating an Access Token
 Now, we need to create a fine-grained Personal Access Token so our widget can access Github’s GraphQL API. 
 
-But first, what is a Github GraphQL API? 
-GitHub GraphQL API is an API provided by Github that lets you query and modify GitHub data using the GraphQL query language, rather than making separate REST requests! 
+But first, what is a GitHub GraphQL API? 
+GitHub GraphQL API is an API provided by GitHub that lets you query and modify GitHub data using the GraphQL query language, rather than making separate REST requests! 
 
 To create one, go to https://github.com → settings → credentials → fine-grained tokens, and then generate a new token.
 <img width="800" height="auto" alt="github credentials (1)" src="https://github.com/user-attachments/assets/8bbbff1d-76bf-4acc-9164-66358eaffed3" />
@@ -111,7 +111,7 @@ export const ASSETS = {
 ```
 Here, ```process.cwd()``` returns your project’s root folder and ```path.join()```safely builds the full file path
 
-After this runs, instead of “"/assets/fish.png", you get something like 
+After this runs, instead of "/assets/fish.png", you get something like 
 ```
 {
   sleepingCat: "data:image/png;base64,iVBORw0KGgoAAA...",
@@ -169,7 +169,7 @@ export async function getGitHubStats(username: string) {
   `;
 ```
 
-Next, lets send an HTTP POST request to github. We now get to use the token we placed in the .```env``` file~
+Next, lets send an HTTP POST request to GitHub. We now get to use the token we placed in the .```env``` file~
 ```
  const res = await fetch("https://api.github.com/graphql", { //sends a network req to GraphQL endpoint
     method: "POST",
@@ -251,7 +251,7 @@ As long as everyday has atleast 1 contribution, the streak extends.
 ```
 
 ## Step 7: Creating an SVG
-Let’s put all of this together! In route.ts import the helper functions ```getGitHubStas()``` to fetch the current github streak, ```getPetState()``` to decide wheter the cat should be sleeping or awake and ```ASSETS``` that contain Base64 data objects
+Let’s put all of this together! In route.ts import the helper functions ```getGitHubStas()``` to fetch the current GitHub streak, ```getPetState()``` to decide wheter the cat should be sleeping or awake and ```ASSETS``` that contain Base64 data objects
 ```
  import { getGitHubStats } from "@/lib/github";
   import { getPetState } from "@/lib/pet";
