@@ -50,7 +50,7 @@ First, let’s set up a space for this project! Open your terminal and run the f
 ```
 mkdir github-readme-widget
 cd github-readme-widget
-npm init -y
+npx create-next-app@latest . --typescript
 ```
 Next, let’s create the following project structure. Make sure you have these files!
 ```
@@ -181,7 +181,7 @@ Next, let's send an HTTP POST request to GitHub. We now get to use the token we 
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      Query,
+      query,
       variables: {
         login: username,  //this is the data we are sending
       },
@@ -243,9 +243,9 @@ As long as every day has at least 1 contribution, the streak extends.
 ```
   for (let i = startIndex; i < reversed.length; i++) {
     if (reversed[i].contributionCount > 0) {
-      Streak++; //if day has contributions keep checking
+      streak++; //if day has contributions keep checking
     } else {
-      Break; //break the loop if a day has zero contributions
+      break; //break the loop if a day has zero contributions
     }
   }
 
